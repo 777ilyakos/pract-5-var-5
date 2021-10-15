@@ -60,58 +60,123 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="LabelStyle1" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="#66C6E0FF" BorderThickness="1" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <Grid>
         <InkCanvas IsEnabled="False">
             <Image Source="background.png" Stretch="Fill" Height="336" Width="649"/>
         </InkCanvas>
-        
+
         <GroupBox Margin="7,0,444,0" BorderBrush="{x:Null}" BorderThickness="0,2" Background="#33FFFFFF" >
             <Grid>
                 <Button Style="{DynamicResource ButtonStyle1}" Content="выход" Margin="0,278,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="140" Click="Close_Click"/>
                 <Button Style="{DynamicResource ButtonStyle1}" Content="о программе" HorizontalAlignment="Center" Margin="0,251,0,0" VerticalAlignment="Top" Width="140" Click="Info_Click"/>
-                <StackPanel Orientation="Horizontal" Height="77">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-                            
+                <StackPanel Orientation="Horizontal" Height="77" Width="140">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="49" Margin="-2,0,0,0">
+                            <Label Style="{DynamicResource LabelStyle1}" Margin="1" Content="№\XY" Foreground="#FFC6E0FF" FontSize="15"/>
                         </Border>
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="49" Margin="-2,0,0,0">
+                            <Label Style="{DynamicResource LabelStyle1}" Margin="1" Content="1" Foreground="#FFC6E0FF" FontSize="15"/>
                         </Border>
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="49" Margin="-2,0,0,0">
+                            <Label Style="{DynamicResource LabelStyle1}" Margin="1" Content="2" Foreground="#FFC6E0FF" FontSize="15"/>
                         </Border>
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
-                        </Border>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
-                        </Border>
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
-                        </Border>
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
-                        </Border>
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="49" Margin="-2,0,0,0">
+                            <Label Style="{DynamicResource LabelStyle1}" Margin="1" Content="3" Foreground="#FFC6E0FF" FontSize="15"/>
                         </Border>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47" >
+                            <Label Style="{DynamicResource LabelStyle1}" Margin="1" Content="X" Foreground="#FFC6E0FF" FontSize="15"/>
                         </Border>
                         <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
+                            <TextBox x:Name="coordX1" Style="{DynamicResource TextBoxStyle1}" Text="0"/>
                         </Border>
                         <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
+                            <TextBox x:Name="coordX2" Style="{DynamicResource TextBoxStyle1}" Text="0"/>
                         </Border>
                         <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
-
+                            <TextBox x:Name="coordX3" Style="{DynamicResource TextBoxStyle1}" Text="0"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
+                            <Label Style="{DynamicResource LabelStyle1}" Margin="1" Content="Y" Foreground="#FFC6E0FF" FontSize="15"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
+                            <TextBox x:Name="coordY1" Style="{DynamicResource TextBoxStyle1}" Text="0"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
+                            <TextBox x:Name="coordY2" Style="{DynamicResource TextBoxStyle1}" Text="0"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="AliceBlue" Height="20" Width="47">
+                            <TextBox x:Name="coordY3" Style="{DynamicResource TextBoxStyle1}" Text="0"/>
                         </Border>
                     </StackPanel>
                 </StackPanel>
@@ -122,6 +187,6 @@
                 <Canvas x:Name="canvase" Background="Transparent"/>
             </Grid>
         </GroupBox>
-        
+
     </Grid>
 </Window>
