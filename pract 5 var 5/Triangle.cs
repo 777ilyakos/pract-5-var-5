@@ -17,6 +17,7 @@ namespace pract_5_var_5
     class Triangle
     {
 
-        private int X;
+        private int X;//ывлюдбптьфждрп
+
     }
 }
